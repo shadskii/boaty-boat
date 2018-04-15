@@ -11,10 +11,15 @@ export default class Boaty extends Phaser.GameObjects.Sprite {
     update (keys) {
         if (keys.jump.isDown) {
             this.jump();
+        } else if (this.angle < 15) {
+            this.angle += 1;
         }
     }
 
     jump () {
         this.body.setVelocityY(-200);
+        if (this.angle > -20) {
+            this.angle -= 4;
+        }
     }
 }
