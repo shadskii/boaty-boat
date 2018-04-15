@@ -19,14 +19,16 @@ class GameScene extends Phaser.Scene {
         this.add.image(400, 300, 'sky');
         this.platforms = this.physics.add.staticGroup();
         this.platforms.create(400, 568, 'ground').setScale(2).refreshBody();
+        this.score = 0;
+        this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 
         this.boaty = new Boaty({
             scene: this,
             key: 'boaty',
-            x: 200,
+            x: 100,
             y: this.sys.game.config.height - 450
         });
-        this.pipes = this.add.group();
+        this.mines = this.add.group();
 
         this.time.addEvent({
             delay: 2000,
@@ -35,8 +37,6 @@ class GameScene extends Phaser.Scene {
             loop: true
         });
 
-
-
         this.keys = {
             jump: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP)
         };
@@ -44,22 +44,30 @@ class GameScene extends Phaser.Scene {
 
     update () {
         this.boaty.update(this.keys);
+        this.mines.children.entries.forEach(element => {
+            element.update();
+        });
         if (this.boaty.y > this.cameras.main.height || !this.boaty.alive) {
             this.restartGame();
         }
     }
     addMine () {
         var yPos = Math.floor(Math.random() * this.sys.game.config.height) - 20;
-        this.mine = new Mine({
+        this.mines.add(new Mine({
             scene: this,
             key: 'mine',
             x: 800,
             y: yPos
-        });
+        }));
     }
 
     restartGame () {
         this.scene.start('GameScene');
+    }
+
+    incrementScore () {
+        this.score++;
+        this.scoreText.setText('Score: ' + this.score);
     }
 }
 
