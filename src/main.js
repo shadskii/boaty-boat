@@ -1,6 +1,7 @@
 import 'phaser';
 import GameScene from './scenes/GameScene';
 import BootScene from './scenes/BootScene';
+import TitleScene from './scenes/TitleScene';
 import GameOverScene from './scenes/GameOverScene';
 
 let config = {
@@ -17,6 +18,7 @@ let config = {
     },
     scene: [
         BootScene,
+        TitleScene,
         GameScene
     ]
 };

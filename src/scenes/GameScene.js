@@ -8,7 +8,7 @@ class GameScene extends Phaser.Scene {
     }
 
     create () {
-        this.add.image(400, 300, 'sky');
+        this.add.image(400, 300, 'sky').setScale(10, 1);
         this.platforms = this.physics.add.staticGroup();
         this.platforms.create(400, 568, 'ground').setScale(2).refreshBody();
         this.score = 0;
@@ -61,7 +61,7 @@ class GameScene extends Phaser.Scene {
     }
 
     restartGame () {
-        this.scene.start('GameScene');
+        this.scene.start('TitleScene');
     }
 
     incrementScore () {
