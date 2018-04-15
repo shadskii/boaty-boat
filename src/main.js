@@ -1,15 +1,13 @@
 import 'phaser';
-import BootScene from './BootScene';
-import MarioBrosScene from './MarioBrosScene';
-import TitleScene from './TitleScene';
-
+import GameScene from './scenes/GameScene';
+import BootScene from './scenes/BootScene';
+import GameOverScene from './scenes/GameOverScene';
 
 let config = {
-    type: Phaser.WEBGL,
+    type: Phaser.AUTO,
     parent: 'content',
-    width: 400,
-    height: 240,
-    scaleMode: 0, //Phaser.ScaleManager.EXACT_FIT,
+    width: 800,
+    height: 600,
     physics: {
         default: 'arcade',
         arcade: {
@@ -19,8 +17,7 @@ let config = {
     },
     scene: [
         BootScene,
-        TitleScene,
-        MarioBrosScene,
+        GameScene
     ]
 };
 
