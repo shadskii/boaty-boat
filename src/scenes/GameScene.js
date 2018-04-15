@@ -22,8 +22,9 @@ class GameScene extends Phaser.Scene {
             x: 100,
             y: this.sys.game.config.height - 450
         });
-        this.mines = this.add.group();
 
+        // Enemy generation
+        this.mines = this.add.group();
         this.time.addEvent({
             delay: 2000,
             callback: this.addMine,
@@ -31,13 +32,19 @@ class GameScene extends Phaser.Scene {
             loop: true
         });
 
-        this.keys = {
-            jump: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP)
-        };
+        // Input controls
+        this.isJump = false;
+        this.input.on('pointerdown', (pointer) => {
+            this.isJump = true;
+        });
+        this.input.on('pointerup', (pointer) => {
+            this.isJump = false;
+        });
+        this.spaceJump = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     }
 
     update () {
-        this.boaty.update(this.keys);
+        this.boaty.update(this.isJump || this.spaceJump.isDown);
         this.mines.children.entries.forEach(element => {
             element.update();
         });
