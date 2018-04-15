@@ -59,7 +59,7 @@ class GameScene extends Phaser.Scene {
                 this.pipes.add(pipe);
 
                 // Enable physics on the pipe 
-                this.physics.add.create(pipe);
+                // this.physics.add.create(pipe);
 
                 // Add velocity to the pipe to make it move left
                 // pipe.body.velocity.x = -200;
