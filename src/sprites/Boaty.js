@@ -6,6 +6,7 @@ export default class Boaty extends Phaser.GameObjects.Sprite {
         this.acceleration = 600;
         this.body.maxVelocity.x = 200;
         this.setScale(0.08);
+        this.alive = true;
     }
 
     update (keys) {
@@ -21,5 +22,9 @@ export default class Boaty extends Phaser.GameObjects.Sprite {
         if (this.angle > -20) {
             this.angle -= 4;
         }
+    }
+
+    die () {
+        this.alive = false;
     }
 }

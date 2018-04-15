@@ -22,6 +22,3 @@ let config = {
 };
 
 let game = new Phaser.Game(config);
-
-/*
-https://codepen.io/samme/pen/JMVBeV*/

@@ -44,16 +44,17 @@ class GameScene extends Phaser.Scene {
 
     update () {
         this.boaty.update(this.keys);
-        if (this.boaty.y > this.cameras.main.height) {
+        if (this.boaty.y > this.cameras.main.height || !this.boaty.alive) {
             this.restartGame();
         }
     }
     addMine () {
+        var yPos = Math.floor(Math.random() * this.sys.game.config.height) - 20;
         this.mine = new Mine({
             scene: this,
             key: 'mine',
             x: 800,
-            y: this.sys.game.config.height - 450
+            y: yPos
         });
     }
 
