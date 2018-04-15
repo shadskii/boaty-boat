@@ -5,13 +5,7 @@ import Mine from '../sprites/Mine';
 class GameScene extends Phaser.Scene {
     constructor () {
         super({
-            key: 'GameScene',
-            physics: {
-                system: 'impact',
-                gravity: 250,
-                debug: false,
-                setBounds: false
-            }
+            key: 'GameScene'
         });
     }
 
@@ -20,7 +14,7 @@ class GameScene extends Phaser.Scene {
         this.platforms = this.physics.add.staticGroup();
         this.platforms.create(400, 568, 'ground').setScale(2).refreshBody();
         this.score = 0;
-        this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+        this.scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
 
         this.boaty = new Boaty({
             scene: this,
