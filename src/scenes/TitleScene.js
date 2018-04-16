@@ -32,7 +32,7 @@ class TitleScene extends Phaser.Scene {
         el.style.height = adjH + 'px';
         console.log(cw, ch);
 
-        this.title = this.add.text(adjW / 10, adjH / 10, 'Boaty Boat', { fontSize: '80px', fill: '#fff' });
+        this.title = this.add.text(adjW / 10, adjH / 10, 'Boaty McBoatFace', { fontSize: '60px', fill: '#fff' });
         this.pressStart = this.add.text(adjW / 2, adjH, 'TAP TO START', { fontSize: '16px', fill: '#fff' });
         this.startKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.start = false;
