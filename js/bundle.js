@@ -147023,7 +147023,7 @@ var GameScene = function (_Phaser$Scene) {
             // Enemy generation
             this.mines = this.add.group();
             this.time.addEvent({
-                delay: 2000,
+                delay: 1000,
                 callback: this.addMine,
                 callbackScope: this,
                 loop: true
@@ -147173,7 +147173,7 @@ var Mine = function (_Phaser$GameObjects$S) {
 
         config.scene.physics.world.enable(_this);
         config.scene.add.existing(_this);
-        _this.body.velocity.x = -200;
+        _this.body.velocity.x = -400;
         _this.acceleration = 0;
         _this.body.maxVelocity.y = 0;
         _this.body.setSize(200, 20);
