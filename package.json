@@ -7,8 +7,7 @@
     "main": "index.js",
     "scripts": {
         "dev": "webpack",
-        "deployGh": "gh-pages -d build",
-        "deploy": "webpack --config webpack.production.config.js",
+        "deploy": "webpack --config webpack.production.config.js && gh-pages -d build",
         "test": "eslint ./src/**/**.js"
     },
     "license": "MIT",
