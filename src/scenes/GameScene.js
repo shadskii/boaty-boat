@@ -24,7 +24,7 @@ class GameScene extends Phaser.Scene {
         // Enemy generation
         this.mines = this.add.group();
         this.time.addEvent({
-            delay: 2000,
+            delay: 1000,
             callback: this.addMine,
             callbackScope: this,
             loop: true

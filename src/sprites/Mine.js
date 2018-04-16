@@ -3,7 +3,7 @@ export default class Mine extends Phaser.GameObjects.Sprite {
         super(config.scene, config.x, config.y, config.key);
         config.scene.physics.world.enable(this);
         config.scene.add.existing(this);
-        this.body.velocity.x = -200;
+        this.body.velocity.x = -400;
         this.acceleration = 0;
         this.body.maxVelocity.y = 0;
         this.body.setSize(200, 20);
