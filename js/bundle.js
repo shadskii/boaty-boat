@@ -147027,7 +147027,7 @@ var GameScene = function (_Phaser$Scene) {
             // Enemy generation
             this.mines = this.add.group();
             this.time.addEvent({
-                delay: 1000,
+                delay: 800,
                 callback: this.addMine,
                 callbackScope: this,
                 loop: true
@@ -147061,7 +147061,7 @@ var GameScene = function (_Phaser$Scene) {
             this.mines.add(new _Mine2.default({
                 scene: this,
                 key: 'mine',
-                x: this.width,
+                x: this.width + this.width / 10,
                 y: yPos
             }));
         }
