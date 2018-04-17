@@ -8,19 +8,23 @@ class GameScene extends Phaser.Scene {
     }
 
     create () {
-        this.add.image(400, 300, 'sky').setScale(10, 1);
+        this.width = this.sys.game.config.width;
+        this.height = this.sys.game.config.height;
+
+        this.add.image(this.width / 2, this.height / 2, 'sky').setScale(10, 2);
         this.platforms = this.physics.add.staticGroup();
-        this.platforms.create(400, 568, 'ground').setScale(2).refreshBody();
+        this.platforms.create(0, this.height, 'ground').setScale(10, 0.5).refreshBody();
+
         this.score = 0;
         this.scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
 
         this.boaty = new Boaty({
             scene: this,
             key: 'boaty',
-            x: 100,
-            y: this.sys.game.config.height - 450
+            x: this.width / 10,
+            y: this.height / 10
         });
-
+        
         // Enemy generation
         this.mines = this.add.group();
         this.time.addEvent({
@@ -41,6 +45,7 @@ class GameScene extends Phaser.Scene {
         this.spaceJump = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     }
 
+
     update () {
         this.boaty.update(this.isJump || this.spaceJump.isDown);
         this.mines.children.entries.forEach(element => {
@@ -51,11 +56,11 @@ class GameScene extends Phaser.Scene {
         }
     }
     addMine () {
-        var yPos = Math.floor(Math.random() * this.sys.game.config.height) - 20;
+        var yPos = Math.floor(Math.random() * this.height) - 20;
         this.mines.add(new Mine({
             scene: this,
             key: 'mine',
-            x: 800,
+            x: this.width,
             y: yPos
         }));
     }

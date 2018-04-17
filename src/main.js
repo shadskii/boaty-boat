@@ -7,8 +7,8 @@ import GameOverScene from './scenes/GameOverScene';
 let config = {
     type: Phaser.AUTO,
     parent: 'content',
-    width: 800,
-    height: 600,
+    width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
+    height: window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight,
     physics: {
         default: 'arcade',
         arcade: {
