@@ -99250,8 +99250,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var config = {
     type: Phaser.AUTO,
     parent: 'content',
-    width: 800,
-    height: 600,
+    width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
+    height: window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight,
     physics: {
         default: 'arcade',
         arcade: {
@@ -147007,17 +147007,21 @@ var GameScene = function (_Phaser$Scene) {
         value: function create() {
             var _this2 = this;
 
-            this.add.image(400, 300, 'sky').setScale(10, 1);
+            this.width = this.sys.game.config.width;
+            this.height = this.sys.game.config.height;
+
+            this.add.image(this.width / 2, this.height / 2, 'sky').setScale(10, 2);
             this.platforms = this.physics.add.staticGroup();
-            this.platforms.create(400, 568, 'ground').setScale(2).refreshBody();
+            this.platforms.create(0, this.height, 'ground').setScale(10, 0.5).refreshBody();
+
             this.score = 0;
             this.scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
 
             this.boaty = new _Boaty2.default({
                 scene: this,
                 key: 'boaty',
-                x: 100,
-                y: this.sys.game.config.height - 450
+                x: this.width / 10,
+                y: this.height / 10
             });
 
             // Enemy generation
@@ -147053,11 +147057,11 @@ var GameScene = function (_Phaser$Scene) {
     }, {
         key: 'addMine',
         value: function addMine() {
-            var yPos = Math.floor(Math.random() * this.sys.game.config.height) - 20;
+            var yPos = Math.floor(Math.random() * this.height) - 20;
             this.mines.add(new _Mine2.default({
                 scene: this,
                 key: 'mine',
-                x: 800,
+                x: this.width,
                 y: yPos
             }));
         }
@@ -147127,7 +147131,7 @@ var Boaty = function (_Phaser$GameObjects$S) {
     }, {
         key: "jump",
         value: function jump() {
-            this.body.setVelocityY(-200);
+            this.body.setVelocityY(-350);
             if (this.angle > -20) {
                 this.angle = -15;
             }
@@ -147236,7 +147240,7 @@ var BootScene = function (_Phaser$Scene) {
         key: 'preload',
         value: function preload() {
             this.load.image('sky', 'assets/images/sky.png');
-            this.load.image('ground', 'assets/images/platform.png');
+            this.load.image('ground', 'assets/images/sandy-bottom.png');
             this.load.image('mine', 'assets/images/sea_mine.png');
             this.load.image('boaty', 'assets/images/boaty.png');
         }
@@ -147291,34 +147295,22 @@ var TitleScene = function (_Phaser$Scene) {
         value: function create() {
             var _this2 = this;
 
-            this.scene.bringToTop();
-            this.add.image(400, 300, 'sky').setScale(10, 1);
-            this.platforms = this.physics.add.staticGroup();
-            this.platforms.create(400, 568, 'ground').setScale(2).refreshBody();
-            var sh = window.screen.availHeight;
-            var sw = window.screen.availWidth;
-            var ch = 0;
-            var cw = 0;
-            if (sh / sw > 0.6) {
-                // Portrait
-                cw = sw;
-                ch = sw * 0.6;
-            } else {
-                // Landscape
-                console.log('landscape');
-                cw = sh / 0.5;
-                ch = sh;
-            }
-            var el = document.getElementsByTagName('canvas')[0];
-            console.log(el);
-            var adjW = cw * 0.85;
-            var adjH = ch * 0.85;
-            el.style.width = adjW + 'px';
-            el.style.height = adjH + 'px';
-            console.log(cw, ch);
+            var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+            var height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 
-            this.title = this.add.text(adjW / 10, adjH / 10, 'Boaty McBoatFace', { fontSize: '60px', fill: '#fff' });
-            this.pressStart = this.add.text(adjW / 2, adjH, 'TAP TO START', { fontSize: '16px', fill: '#fff' });
+            this.scene.bringToTop();
+            this.add.image(width / 2, height / 2, 'sky').setScale(10, 2);
+            this.platforms = this.physics.add.staticGroup();
+            this.platforms.create(0, height, 'ground').setScale(10, 0.5).refreshBody();
+
+            var canvas = document.getElementsByTagName('canvas')[0];
+            console.log(canvas);
+            canvas.width = width;
+            canvas.height = height;
+            console.log(canvas);
+
+            this.title = this.add.text(width / 10, height / 10, 'Boaty McBoatFace', { fontSize: '60px', fill: '#fff' });
+            this.pressStart = this.add.text(width / 2, height, 'TAP TO START', { fontSize: '16px', fill: '#fff' });
             this.startKey = this.input.keyboard.addKey(_phaser2.default.Input.Keyboard.KeyCodes.SPACE);
             this.start = false;
             this.input.on('pointerdown', function (pointer) {
