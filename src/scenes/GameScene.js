@@ -24,11 +24,11 @@ class GameScene extends Phaser.Scene {
             x: this.width / 10,
             y: this.height / 10
         });
-        
+
         // Enemy generation
         this.mines = this.add.group();
         this.time.addEvent({
-            delay: 1000,
+            delay: 800,
             callback: this.addMine,
             callbackScope: this,
             loop: true
@@ -60,7 +60,7 @@ class GameScene extends Phaser.Scene {
         this.mines.add(new Mine({
             scene: this,
             key: 'mine',
-            x: this.width,
+            x: this.width + this.width / 10,
             y: yPos
         }));
     }

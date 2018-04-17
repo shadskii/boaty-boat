@@ -9,9 +9,9 @@ class TitleScene extends Phaser.Scene {
         var height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 
         this.scene.bringToTop();
-        this.add.image(400, 300, 'sky').setScale(10, 1);
+        this.add.image(width / 2, height / 2, 'sky').setScale(10, 2);
         this.platforms = this.physics.add.staticGroup();
-        this.platforms.create(400, 568, 'ground').setScale(2).refreshBody();
+        this.platforms.create(0, height, 'ground').setScale(10, 0.5).refreshBody();
 
         let canvas = document.getElementsByTagName('canvas')[0];
         console.log(canvas);
