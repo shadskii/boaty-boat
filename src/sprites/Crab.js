@@ -1,9 +1,9 @@
-export default class Whale extends Phaser.GameObjects.Sprite {
+export default class Crab extends Phaser.GameObjects.Sprite {
     constructor (config) {
         super(config.scene, config.x, config.y, config.key);
         config.scene.physics.world.enable(this);
         config.scene.add.existing(this);
-        this.body.velocity.x = -600;
+        this.body.velocity.x = -1000;
         this.acceleration = 0;
         this.body.maxVelocity.y = 0;
         this.body.setSize(200, 20);

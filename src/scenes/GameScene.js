@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import Boaty from '../sprites/Boaty';
 import Mine from '../sprites/Mine';
 import Whale from '../sprites/Whale';
+import Crab from '../sprites/Crab';
 
 class GameScene extends Phaser.Scene {
     constructor () {
@@ -37,6 +38,12 @@ class GameScene extends Phaser.Scene {
         this.time.addEvent({
             delay: 2000,
             callback: this.addWhale,
+            callbackScope: this,
+            loop: true
+        });
+        this.time.addEvent({
+            delay: 4000,
+            callback: this.addCrab,
             callbackScope: this,
             loop: true
         });
@@ -83,6 +90,14 @@ class GameScene extends Phaser.Scene {
             key: 'whale',
             x: this.width + this.width / 10,
             y: this.enemySpawnYValue()
+        }));
+    }
+    addCrab () {
+        this.mines.add(new Crab({
+            scene: this,
+            key: 'crab',
+            x: this.width + this.width / 10,
+            y: this.height * 0.95
         }));
     }
     restartGame () {
