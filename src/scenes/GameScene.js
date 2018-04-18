@@ -59,7 +59,6 @@ class GameScene extends Phaser.Scene {
         this.spaceJump = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     }
 
-
     update () {
         this.boaty.update(this.isJump || this.spaceJump.isDown);
         this.enemies.children.entries.forEach(element => {
