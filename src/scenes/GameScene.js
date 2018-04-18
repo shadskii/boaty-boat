@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import Boaty from '../sprites/Boaty';
 import Mine from '../sprites/Mine';
+import Whale from '../sprites/Whale';
 
 class GameScene extends Phaser.Scene {
     constructor () {
@@ -33,6 +34,12 @@ class GameScene extends Phaser.Scene {
             callbackScope: this,
             loop: true
         });
+        this.time.addEvent({
+            delay: 2000,
+            callback: this.addWhale,
+            callbackScope: this,
+            loop: true
+        });
 
         // Input controls
         this.isJump = false;
@@ -55,16 +62,29 @@ class GameScene extends Phaser.Scene {
             this.restartGame();
         }
     }
+
+    enemySpawnYValue () {
+        var range = this.height * 0.9;
+        var bottomPad = this.height * 0.05;
+        return Math.floor(Math.random() * range) + bottomPad;
+    }
+
     addMine () {
-        var yPos = Math.floor(Math.random() * this.height) - 20;
         this.mines.add(new Mine({
             scene: this,
             key: 'mine',
             x: this.width + this.width / 10,
-            y: yPos
+            y: this.enemySpawnYValue()
         }));
     }
-
+    addWhale () {
+        this.mines.add(new Whale({
+            scene: this,
+            key: 'whale',
+            x: this.width + this.width / 10,
+            y: this.enemySpawnYValue()
+        }));
+    }
     restartGame () {
         this.scene.start('TitleScene');
     }
