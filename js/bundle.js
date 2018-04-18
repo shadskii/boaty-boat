@@ -99233,15 +99233,15 @@ var _GameScene = __webpack_require__(1347);
 
 var _GameScene2 = _interopRequireDefault(_GameScene);
 
-var _BootScene = __webpack_require__(1350);
+var _BootScene = __webpack_require__(1352);
 
 var _BootScene2 = _interopRequireDefault(_BootScene);
 
-var _TitleScene = __webpack_require__(1351);
+var _TitleScene = __webpack_require__(1353);
 
 var _TitleScene2 = _interopRequireDefault(_TitleScene);
 
-var _GameOverScene = __webpack_require__(1352);
+var _GameOverScene = __webpack_require__(1354);
 
 var _GameOverScene2 = _interopRequireDefault(_GameOverScene);
 
@@ -146985,6 +146985,14 @@ var _Mine = __webpack_require__(1349);
 
 var _Mine2 = _interopRequireDefault(_Mine);
 
+var _Whale = __webpack_require__(1350);
+
+var _Whale2 = _interopRequireDefault(_Whale);
+
+var _Crab = __webpack_require__(1351);
+
+var _Crab2 = _interopRequireDefault(_Crab);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -147025,10 +147033,22 @@ var GameScene = function (_Phaser$Scene) {
             });
 
             // Enemy generation
-            this.mines = this.add.group();
+            this.enemies = this.add.group();
             this.time.addEvent({
                 delay: 800,
                 callback: this.addMine,
+                callbackScope: this,
+                loop: true
+            });
+            this.time.addEvent({
+                delay: 2000,
+                callback: this.addWhale,
+                callbackScope: this,
+                loop: true
+            });
+            this.time.addEvent({
+                delay: 4000,
+                callback: this.addCrab,
                 callbackScope: this,
                 loop: true
             });
@@ -147047,7 +147067,7 @@ var GameScene = function (_Phaser$Scene) {
         key: 'update',
         value: function update() {
             this.boaty.update(this.isJump || this.spaceJump.isDown);
-            this.mines.children.entries.forEach(function (element) {
+            this.enemies.children.entries.forEach(function (element) {
                 element.update();
             });
             if (this.boaty.y > this.cameras.main.height || !this.boaty.alive) {
@@ -147055,14 +147075,40 @@ var GameScene = function (_Phaser$Scene) {
             }
         }
     }, {
+        key: 'enemySpawnYValue',
+        value: function enemySpawnYValue() {
+            var range = this.height * 0.9;
+            var bottomPad = this.height * 0.05;
+            return Math.floor(Math.random() * range) + bottomPad;
+        }
+    }, {
         key: 'addMine',
         value: function addMine() {
-            var yPos = Math.floor(Math.random() * this.height) - 20;
-            this.mines.add(new _Mine2.default({
+            this.enemies.add(new _Mine2.default({
                 scene: this,
                 key: 'mine',
                 x: this.width + this.width / 10,
-                y: yPos
+                y: this.enemySpawnYValue()
+            }));
+        }
+    }, {
+        key: 'addWhale',
+        value: function addWhale() {
+            this.enemies.add(new _Whale2.default({
+                scene: this,
+                key: 'whale',
+                x: this.width + this.width / 10,
+                y: this.enemySpawnYValue()
+            }));
+        }
+    }, {
+        key: 'addCrab',
+        value: function addCrab() {
+            this.enemies.add(new _Crab2.default({
+                scene: this,
+                key: 'crab',
+                x: this.width + this.width / 10,
+                y: this.height * 0.95
             }));
         }
     }, {
@@ -147197,7 +147243,7 @@ var Mine = function (_Phaser$GameObjects$S) {
         value: function update() {
             if (this.x <= 0) {
                 this.scene.incrementScore();
-                this.scene.mines.remove(this);
+                this.scene.enemies.remove(this);
                 this.destroy();
             }
         }
@@ -147210,6 +147256,126 @@ exports.default = Mine;
 
 /***/ }),
 /* 1350 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Whale = function (_Phaser$GameObjects$S) {
+    _inherits(Whale, _Phaser$GameObjects$S);
+
+    function Whale(config) {
+        _classCallCheck(this, Whale);
+
+        var _this = _possibleConstructorReturn(this, (Whale.__proto__ || Object.getPrototypeOf(Whale)).call(this, config.scene, config.x, config.y, config.key));
+
+        config.scene.physics.world.enable(_this);
+        config.scene.add.existing(_this);
+        _this.body.velocity.x = -600;
+        _this.acceleration = 0;
+        _this.body.maxVelocity.y = 0;
+        _this.body.setSize(200, 20);
+        _this.setScale(0.2, 0.2);
+        _this.boaty = _this.scene.boaty;
+        _this.scene.physics.add.overlap(_this, _this.boaty, _this.boatyHit, null, _this);
+        return _this;
+    }
+
+    _createClass(Whale, [{
+        key: "boatyHit",
+        value: function boatyHit(mine, boaty) {
+            this.boaty.die();
+        }
+    }, {
+        key: "update",
+        value: function update() {
+            if (this.x <= 0) {
+                this.scene.incrementScore();
+                this.scene.enemies.remove(this);
+                this.destroy();
+            }
+        }
+    }]);
+
+    return Whale;
+}(Phaser.GameObjects.Sprite);
+
+exports.default = Whale;
+
+/***/ }),
+/* 1351 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Crab = function (_Phaser$GameObjects$S) {
+    _inherits(Crab, _Phaser$GameObjects$S);
+
+    function Crab(config) {
+        _classCallCheck(this, Crab);
+
+        var _this = _possibleConstructorReturn(this, (Crab.__proto__ || Object.getPrototypeOf(Crab)).call(this, config.scene, config.x, config.y, config.key));
+
+        config.scene.physics.world.enable(_this);
+        config.scene.add.existing(_this);
+        _this.body.velocity.x = -1000;
+        _this.acceleration = 0;
+        _this.body.maxVelocity.y = 0;
+        _this.body.setSize(200, 20);
+        _this.setScale(0.2, 0.2);
+        _this.boaty = _this.scene.boaty;
+        _this.scene.physics.add.overlap(_this, _this.boaty, _this.boatyHit, null, _this);
+        return _this;
+    }
+
+    _createClass(Crab, [{
+        key: "boatyHit",
+        value: function boatyHit(mine, boaty) {
+            this.boaty.die();
+        }
+    }, {
+        key: "update",
+        value: function update() {
+            if (this.x <= 0) {
+                this.scene.incrementScore();
+                this.scene.enemies.remove(this);
+                this.destroy();
+            }
+        }
+    }]);
+
+    return Crab;
+}(Phaser.GameObjects.Sprite);
+
+exports.default = Crab;
+
+/***/ }),
+/* 1352 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -147243,6 +147409,8 @@ var BootScene = function (_Phaser$Scene) {
             this.load.image('ground', 'assets/images/sandy-bottom.png');
             this.load.image('mine', 'assets/images/sea_mine.png');
             this.load.image('boaty', 'assets/images/boaty.png');
+            this.load.image('whale', 'assets/images/whale.png');
+            this.load.image('crab', 'assets/images/crab.png');
         }
     }, {
         key: 'create',
@@ -147257,7 +147425,7 @@ var BootScene = function (_Phaser$Scene) {
 exports.default = BootScene;
 
 /***/ }),
-/* 1351 */
+/* 1353 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -147309,8 +147477,16 @@ var TitleScene = function (_Phaser$Scene) {
             canvas.height = height;
             console.log(canvas);
 
-            this.title = this.add.text(width / 10, height / 10, 'Boaty McBoatFace', { fontSize: '60px', fill: '#fff' });
-            this.pressStart = this.add.text(width / 2, height, 'TAP TO START', { fontSize: '16px', fill: '#fff' });
+            this.title = this.add.text(width / 10, height / 10, 'Boaty McBoatFace', {
+                fontSize: width / 12 + 'px',
+                fill: '#fff'
+            });
+            this.pressStart = this.add.text(0, 0, 'TAP TO START', {
+                fontSize: '16px',
+                fill: '#fff'
+            });
+            _phaser2.default.Display.Align.In.TopCenter(this.title, this.add.zone(width / 2, height - height / 4, width, height));
+            _phaser2.default.Display.Align.In.BottomCenter(this.pressStart, this.add.zone(width / 2, height / 4, width, height));
             this.startKey = this.input.keyboard.addKey(_phaser2.default.Input.Keyboard.KeyCodes.SPACE);
             this.start = false;
             this.input.on('pointerdown', function (pointer) {
@@ -147332,7 +147508,7 @@ var TitleScene = function (_Phaser$Scene) {
 exports.default = TitleScene;
 
 /***/ }),
-/* 1352 */
+/* 1354 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
