@@ -18,7 +18,7 @@ export default class Crab extends Phaser.GameObjects.Sprite {
     update () {
         if (this.x <= 0) {
             this.scene.incrementScore();
-            this.scene.mines.remove(this);
+            this.scene.enemies.remove(this);
             this.destroy();
         }
     }

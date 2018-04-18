@@ -28,7 +28,7 @@ class GameScene extends Phaser.Scene {
         });
 
         // Enemy generation
-        this.mines = this.add.group();
+        this.enemies = this.add.group();
         this.time.addEvent({
             delay: 800,
             callback: this.addMine,
@@ -62,7 +62,7 @@ class GameScene extends Phaser.Scene {
 
     update () {
         this.boaty.update(this.isJump || this.spaceJump.isDown);
-        this.mines.children.entries.forEach(element => {
+        this.enemies.children.entries.forEach(element => {
             element.update();
         });
         if (this.boaty.y > this.cameras.main.height || !this.boaty.alive) {
@@ -77,7 +77,7 @@ class GameScene extends Phaser.Scene {
     }
 
     addMine () {
-        this.mines.add(new Mine({
+        this.enemies.add(new Mine({
             scene: this,
             key: 'mine',
             x: this.width + this.width / 10,
@@ -85,7 +85,7 @@ class GameScene extends Phaser.Scene {
         }));
     }
     addWhale () {
-        this.mines.add(new Whale({
+        this.enemies.add(new Whale({
             scene: this,
             key: 'whale',
             x: this.width + this.width / 10,
@@ -93,7 +93,7 @@ class GameScene extends Phaser.Scene {
         }));
     }
     addCrab () {
-        this.mines.add(new Crab({
+        this.enemies.add(new Crab({
             scene: this,
             key: 'crab',
             x: this.width + this.width / 10,
