@@ -19,8 +19,18 @@ class TitleScene extends Phaser.Scene {
         canvas.height = height;
         console.log(canvas);
 
-        this.title = this.add.text(width / 10, height / 10, 'Boaty McBoatFace', { fontSize: '60px', fill: '#fff' });
-        this.pressStart = this.add.text(width / 2, height, 'TAP TO START', { fontSize: '16px', fill: '#fff' });
+        this.title = this.add.text(width / 10, height / 10, 'Boaty McBoatFace',
+            {
+                fontSize: width / 12 + 'px',
+                fill: '#fff'
+            });
+        this.pressStart = this.add.text(0, 0, 'TAP TO START',
+            {
+                fontSize: '16px',
+                fill: '#fff'
+            });
+        Phaser.Display.Align.In.TopCenter(this.title, this.add.zone(width / 2, height - height / 4, width, height));
+        Phaser.Display.Align.In.BottomCenter(this.pressStart, this.add.zone(width / 2, height / 4, width, height));
         this.startKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.start = false;
         this.input.on('pointerdown', (pointer) => {
