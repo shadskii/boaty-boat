@@ -19,7 +19,8 @@ let config = {
     scene: [
         BootScene,
         TitleScene,
-        GameScene
+        GameScene,
+        GameOverScene
     ]
 };
 

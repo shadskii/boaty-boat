@@ -11,6 +11,7 @@ class BootScene extends Phaser.Scene {
         this.load.image('boaty', 'assets/images/boaty.png');
         this.load.image('whale', 'assets/images/whale.png');
         this.load.image('crab', 'assets/images/crab.png');
+        this.load.image('play-again', 'assets/images/play_again.png');
     }
 
     create () {

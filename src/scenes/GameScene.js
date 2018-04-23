@@ -100,7 +100,7 @@ class GameScene extends Phaser.Scene {
         }));
     }
     restartGame () {
-        this.scene.start('TitleScene');
+        this.scene.start('GameOverScene', { score: this.score });
     }
 
     incrementScore () {
