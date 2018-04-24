@@ -65,7 +65,7 @@ class GameScene extends Phaser.Scene {
             element.update();
         });
         if (this.boaty.y > this.cameras.main.height || !this.boaty.alive) {
-            this.restartGame();
+            this.scene.start('GameOverScene', { score: this.score });
         }
     }
 
@@ -98,9 +98,6 @@ class GameScene extends Phaser.Scene {
             x: this.width + this.width / 10,
             y: this.height * 0.95
         }));
-    }
-    restartGame () {
-        this.scene.start('GameOverScene', { score: this.score });
     }
 
     incrementScore () {
