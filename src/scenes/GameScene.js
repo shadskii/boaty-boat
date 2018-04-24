@@ -13,7 +13,7 @@ class GameScene extends Phaser.Scene {
         this.width = this.sys.game.config.width;
         this.height = this.sys.game.config.height;
 
-        this.add.image(this.width / 2, this.height / 2, 'sky').setScale(10, 2);
+        this.add.image(this.width / 2, this.height / 2, 'water').setScale(10, 2);
         this.platforms = this.physics.add.staticGroup();
         this.platforms.create(0, this.height, 'ground').setScale(10, 0.5).refreshBody();
 

@@ -9,7 +9,7 @@ class TitleScene extends Phaser.Scene {
         var height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 
         this.scene.bringToTop();
-        this.add.image(width / 2, height / 2, 'sky').setScale(10, 2);
+        this.add.image(width / 2, height / 2, 'water').setScale(10, 2);
         this.platforms = this.physics.add.staticGroup();
         this.platforms.create(0, height, 'ground').setScale(10, 0.5).refreshBody();
 
