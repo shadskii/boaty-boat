@@ -147073,7 +147073,7 @@ var GameScene = function (_Phaser$Scene) {
             this.width = this.sys.game.config.width;
             this.height = this.sys.game.config.height;
 
-            this.add.image(this.width / 2, this.height / 2, 'sky').setScale(10, 2);
+            this.add.image(this.width / 2, this.height / 2, 'water').setScale(10, 2);
             this.platforms = this.physics.add.staticGroup();
             this.platforms.create(0, this.height, 'ground').setScale(10, 0.5).refreshBody();
 
@@ -147125,8 +147125,8 @@ var GameScene = function (_Phaser$Scene) {
             this.enemies.children.entries.forEach(function (element) {
                 element.update();
             });
-            if (this.boaty.y > this.cameras.main.height || !this.boaty.alive) {
-                this.restartGame();
+            if (this.boaty.y > this.cameras.main.height || !this.boaty.alive || this.boaty.y < 0) {
+                this.scene.start('GameOverScene', { score: this.score });
             }
         }
     }, {
@@ -147165,11 +147165,6 @@ var GameScene = function (_Phaser$Scene) {
                 x: this.width + this.width / 10,
                 y: this.height * 0.95
             }));
-        }
-    }, {
-        key: 'restartGame',
-        value: function restartGame() {
-            this.scene.start('GameOverScene', { score: this.score });
         }
     }, {
         key: 'incrementScore',
@@ -147412,7 +147407,7 @@ var BootScene = function (_Phaser$Scene) {
     _createClass(BootScene, [{
         key: 'preload',
         value: function preload() {
-            this.load.image('sky', 'assets/images/sky.png');
+            this.load.image('water', 'assets/images/water.png');
             this.load.image('ground', 'assets/images/sandy-bottom.png');
             this.load.image('mine', 'assets/images/sea_mine.png');
             this.load.image('boaty', 'assets/images/boaty.png');
@@ -147475,7 +147470,7 @@ var TitleScene = function (_Phaser$Scene) {
             var height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 
             this.scene.bringToTop();
-            this.add.image(width / 2, height / 2, 'sky').setScale(10, 2);
+            this.add.image(width / 2, height / 2, 'water').setScale(10, 2);
             this.platforms = this.physics.add.staticGroup();
             this.platforms.create(0, height, 'ground').setScale(10, 0.5).refreshBody();
 
@@ -147557,7 +147552,7 @@ var GameOverScene = function (_Phaser$Scene) {
             var height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 
             this.scene.bringToTop();
-            this.add.image(width / 2, height / 2, 'sky').setScale(10, 2);
+            this.add.image(width / 2, height / 2, 'water').setScale(10, 2);
             this.platforms = this.physics.add.staticGroup();
             this.platforms.create(0, height, 'ground').setScale(10, 0.5).refreshBody();
 
