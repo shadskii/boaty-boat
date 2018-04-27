@@ -147557,11 +147557,11 @@ var GameOverScene = function (_Phaser$Scene) {
             this.platforms.create(0, height, 'ground').setScale(10, 0.5).refreshBody();
 
             this.title = this.add.text(width / 10, height / 10, 'Game Over', {
-                fontSize: width / 12 + 'px',
+                fontSize: width / 10 + 'px',
                 fill: '#fff'
             });
             this.pressStart = this.add.text(0, 0, this.score, {
-                fontSize: width / 15 + 'px',
+                fontSize: width / 12 + 'px',
                 fill: '#fff'
             });
             this.restartButton = this.add.image(0, 0, 'play-again').setInteractive();
@@ -147571,8 +147571,8 @@ var GameOverScene = function (_Phaser$Scene) {
                     _this2.scene.start('GameScene');
                 }
             });
-            Phaser.Display.Align.In.TopCenter(this.title, this.add.zone(width / 2, height - height / 4, width, height));
-            Phaser.Display.Align.In.Center(this.pressStart, this.add.zone(width / 2, height / 2, width, height));
+            Phaser.Display.Align.In.TopCenter(this.title, this.add.zone(width / 2, height - height / 2, width, height));
+            Phaser.Display.Align.In.Center(this.pressStart, this.add.zone(width / 2, height / 4, width, height));
             Phaser.Display.Align.In.BottomCenter(this.restartButton, this.add.zone(width / 2, height / 4, width, height));
         }
     }]);
