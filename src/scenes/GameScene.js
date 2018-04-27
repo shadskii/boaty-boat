@@ -23,8 +23,8 @@ class GameScene extends Phaser.Scene {
         this.boaty = new Boaty({
             scene: this,
             key: 'boaty',
-            x: this.width / 10,
-            y: this.height / 10
+            x: this.width / 8,
+            y: this.height / 7
         });
 
         // Enemy generation
