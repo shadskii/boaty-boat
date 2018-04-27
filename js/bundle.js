@@ -147083,8 +147083,8 @@ var GameScene = function (_Phaser$Scene) {
             this.boaty = new _Boaty2.default({
                 scene: this,
                 key: 'boaty',
-                x: this.width / 10,
-                y: this.height / 10
+                x: this.width / 8,
+                y: this.height / 7
             });
 
             // Enemy generation
