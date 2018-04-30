@@ -147208,10 +147208,11 @@ var Boaty = function (_Phaser$GameObjects$S) {
 
         config.scene.physics.world.enable(_this);
         config.scene.add.existing(_this);
-        _this.acceleration = 600;
-        _this.body.maxVelocity.x = 200;
+        _this.acceleration = 800;
+        _this.body.maxVelocity.x = 300;
         _this.setScale(0.08);
         _this.alive = true;
+        _this.body.setCollideWorldBounds(true);
         return _this;
     }
 
@@ -147221,13 +147222,13 @@ var Boaty = function (_Phaser$GameObjects$S) {
             if (jump) {
                 this.jump();
             } else if (this.angle < 15) {
-                this.angle += 1;
+                this.angle += 0.75;
             }
         }
     }, {
         key: "jump",
         value: function jump() {
-            this.body.setVelocityY(-350);
+            this.body.setVelocityY(-400);
             if (this.angle > -20) {
                 this.angle = -15;
             }
