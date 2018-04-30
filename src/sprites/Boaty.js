@@ -3,10 +3,11 @@ export default class Boaty extends Phaser.GameObjects.Sprite {
         super(config.scene, config.x, config.y, config.key);
         config.scene.physics.world.enable(this);
         config.scene.add.existing(this);
-        this.acceleration = 600;
-        this.body.maxVelocity.x = 200;
+        this.acceleration = 800;
+        this.body.maxVelocity.x = 300;
         this.setScale(0.08);
         this.alive = true;
+        this.body.setCollideWorldBounds(true);
     }
 
     update (jump) {
@@ -14,12 +15,12 @@ export default class Boaty extends Phaser.GameObjects.Sprite {
             this.jump();
         }
         else if (this.angle < 15) {
-            this.angle += 1;
+            this.angle += 0.75;
         }
     }
 
     jump () {
-        this.body.setVelocityY(-350);
+        this.body.setVelocityY(-400);
         if (this.angle > -20) {
             this.angle = -15;
         }
