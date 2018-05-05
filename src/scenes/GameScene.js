@@ -3,6 +3,7 @@ import Boaty from '../sprites/Boaty';
 import Mine from '../sprites/Mine';
 import Whale from '../sprites/Whale';
 import Crab from '../sprites/Crab';
+import Torpedo from '../sprites/Torpedo';
 
 class GameScene extends Phaser.Scene {
     constructor () {
@@ -44,6 +45,12 @@ class GameScene extends Phaser.Scene {
         this.time.addEvent({
             delay: 4000,
             callback: this.addCrab,
+            callbackScope: this,
+            loop: true
+        });
+        this.time.addEvent({
+            delay: 9000,
+            callback: this.addTorpedo,
             callbackScope: this,
             loop: true
         });
@@ -99,7 +106,14 @@ class GameScene extends Phaser.Scene {
             y: this.height * 0.95
         }));
     }
-
+    addTorpedo () {
+        this.enemies.add(new Torpedo({
+            scene: this,
+            key: 'torpedo',
+            x: this.width + this.width / 10,
+            y: this.enemySpawnYValue()
+        }));
+    }
     incrementScore () {
         this.score++;
         this.scoreText.setText('Score: ' + this.score);
