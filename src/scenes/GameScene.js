@@ -71,8 +71,8 @@ class GameScene extends Phaser.Scene {
 
     enemySpawnYValue () {
         var range = this.height * 0.9;
-        var bottomPad = this.height * 0.05;
-        return Math.floor(Math.random() * range) + bottomPad;
+        var topPad = this.height * 0.02;
+        return Math.floor(Math.random() * range) + topPad;
     }
 
     addMine () {
