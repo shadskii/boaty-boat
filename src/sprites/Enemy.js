@@ -12,7 +12,8 @@ export default class extends Phaser.GameObjects.Sprite {
         return true;
     }
     update () {
-        if (this.x <= 0) {
+        let xRightBoundary = this.x + (this.displayWidth / 2);
+        if (xRightBoundary <= 0) {
             this.scene.incrementScore();
             this.scene.enemies.remove(this);
             this.destroy();
