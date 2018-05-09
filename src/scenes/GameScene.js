@@ -94,7 +94,7 @@ class GameScene extends Phaser.Scene {
         this.enemies.add(new Whale({
             scene: this,
             key: 'whale',
-            x: this.width + this.width / 10,
+            x: this.width + this.width / 5,
             y: this.enemySpawnYValue()
         }));
     }
