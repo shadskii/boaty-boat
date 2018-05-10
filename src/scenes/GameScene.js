@@ -71,7 +71,7 @@ class GameScene extends Phaser.Scene {
         this.enemies.children.entries.forEach(element => {
             element.update();
         });
-        if (this.boaty.y > this.cameras.main.height || !this.boaty.alive || this.boaty.y < 0) {
+        if (!this.boaty.alive) {
             this.scene.start('GameOverScene', { score: this.score });
         }
     }
