@@ -19,7 +19,7 @@ class TitleScene extends Scene {
         canvas.height = height;
         console.log(canvas);
 
-        this.title = this.add.text(width / 10, height / 10, 'Boaty McBoatFace',
+        this.title = this.add.text(width / 10, height / 10, 'Boaty Boat',
             {
                 fontSize: width / 12 + 'px',
                 fill: '#fff'
