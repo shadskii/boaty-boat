@@ -22,7 +22,7 @@ export default class GameOverScene extends Phaser.Scene {
             });
         this.pressStart = this.add.text(0, 0, this.score,
             {
-                fontSize: width / 12 + 'px',
+                fontSize: width / 5 + 'px',
                 fill: '#fff'
             });
         this.restartButton = this.add.image(0, 0, 'play-again').setInteractive();
