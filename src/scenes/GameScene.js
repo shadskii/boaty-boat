@@ -19,7 +19,7 @@ class GameScene extends Phaser.Scene {
         this.platforms.create(0, this.height, 'ground').setScale(10, 0.5).refreshBody();
 
         this.score = 0;
-        this.scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
+        this.scoreText = this.add.text(16, 16, '0', { fontSize: '32px', fill: '#000' });
 
         this.boaty = new Boaty({
             scene: this,
@@ -116,7 +116,7 @@ class GameScene extends Phaser.Scene {
     }
     incrementScore () {
         this.score++;
-        this.scoreText.setText('Score: ' + this.score);
+        this.scoreText.setText(this.score);
     }
 }
 
