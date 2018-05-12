@@ -1,8 +1,8 @@
 {
-    "name": "boaty-mcboatface",
+    "name": "boaty-boat",
     "homepage": "https://shadskii.github.io/boaty-boat",
-    "version": "1.0.0",
-    "description": "Help Boaty McBoatFace survive his boating adventure",
+    "version": "2.0.0",
+    "description": "Help Boaty Boat survive his boating adventure",
     "author": "Jake Hassel <jake.k.hassel@gmail.com>",
     "main": "index.js",
     "scripts": {
