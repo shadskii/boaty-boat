@@ -20,7 +20,7 @@ export default class GameOverScene extends Phaser.Scene {
                 fontSize: width / 10 + 'px',
                 fill: '#fff'
             });
-        this.pressStart = this.add.text(0, 0, this.score,
+        this.scoreText = this.add.text(0, 0, this.score,
             {
                 fontSize: width / 5 + 'px',
                 fill: '#fff'
@@ -33,7 +33,7 @@ export default class GameOverScene extends Phaser.Scene {
             }
         });
         Phaser.Display.Align.In.TopCenter(this.title, this.add.zone(width / 2, height - height / 2, width, height));
-        Phaser.Display.Align.In.Center(this.pressStart, this.add.zone(width / 2, height / 4, width, height));
+        Phaser.Display.Align.In.Center(this.scoreText, this.add.zone(width / 2, height / 4, width, height));
         Phaser.Display.Align.In.BottomCenter(this.restartButton, this.add.zone(width / 2, height / 4, width, height));
     }
 }
