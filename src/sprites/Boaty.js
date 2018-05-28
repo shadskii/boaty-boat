@@ -7,7 +7,6 @@ export default class Boaty extends Phaser.GameObjects.Sprite {
         config.scene.add.existing(this);
         this.acceleration = 800;
         this.body.maxVelocity.x = 300;
-        this.setScale(0.08);
         this.alive = true;
         this.body.setCollideWorldBounds(true);
     }
