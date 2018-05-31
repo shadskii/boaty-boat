@@ -1,24 +1,16 @@
 import { Scene } from 'phaser';
+import { calculateSize } from '../game';
 
 class TitleScene extends Scene {
     constructor (test) {
         super({ key: 'TitleScene' });
     }
     create () {
-        var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-        var height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-        width = width > 1500 ? 1500 : width;
-
+        const { width, height } = calculateSize();
         this.scene.bringToTop();
         this.add.image(width / 2, height / 2, 'water').setScale(10, 2);
         this.platforms = this.physics.add.staticGroup();
         this.platforms.create(0, height, 'ground').setScale(10, 0.5).refreshBody();
-
-        let canvas = document.getElementsByTagName('canvas')[0];
-        console.log(canvas);
-        canvas.width = width;
-        canvas.height = height;
-        console.log(canvas);
 
         this.title = this.add.text(width / 10, height / 10, 'Boaty Boat',
             {
