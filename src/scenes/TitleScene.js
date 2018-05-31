@@ -7,6 +7,7 @@ class TitleScene extends Scene {
     create () {
         var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
         var height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+        width = width > 1500 ? 1500 : width;
 
         this.scene.bringToTop();
         this.add.image(width / 2, height / 2, 'water').setScale(10, 2);
