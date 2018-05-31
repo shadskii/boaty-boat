@@ -19,9 +19,7 @@ module.exports = {
         app: [
             'babel-polyfill',
             path.resolve(__dirname, 'src/main.js')
-        ],
-        //vendor: ['pixi']
-
+        ]
     },
     output: {
         path: path.resolve(__dirname, 'build'),
@@ -32,13 +30,6 @@ module.exports = {
         definePlugin,
         new CleanWebpackPlugin(['build']),
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-        /*new webpack.optimize.UglifyJsPlugin({
-          drop_console: true,
-          minimize: true,
-          output: {
-            comments: false
-          }
-        }),*/
         new webpack.optimize.CommonsChunkPlugin({ name: 'vendor' /* chunkName= */, filename: 'js/vendor.bundle.js' /* filename= */ }),
         new HtmlWebpackPlugin({
             filename: 'index.html', // path.resolve(__dirname, 'build', 'index.html'),
@@ -73,10 +64,5 @@ module.exports = {
         net: 'empty',
         tls: 'empty'
     },
-    resolve: {
-        alias: {
-            'phaser': phaser,
-
-        }
-    }
-}
+    resolve: { alias: { phaser: phaser } }
+};
