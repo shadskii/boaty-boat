@@ -1,77 +1,45 @@
-var path = require('path')
-var webpack = require('webpack')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var BrowserSyncPlugin = require('browser-sync-webpack-plugin')
-
-// Phaser webpack config
-var phaserModule = path.join(__dirname, '/node_modules/phaser/')
-var phaser = path.join(phaserModule, 'src/phaser.js')
-
-var definePlugin = new webpack.DefinePlugin({
-    __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true')),
-    WEBGL_RENDERER: true, // I did this to make webpack work, but I'm not really sure it should always be true
-    CANVAS_RENDERER: true // I did this to make webpack work, but I'm not really sure it should always be true
-})
+const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: {
-        app: [
-            'babel-polyfill',
-            path.resolve(__dirname, 'src/game.js')
-        ],
-        vendor: ['phaser']
-    },
-    devtool: 'cheap-source-map',
+    entry: './src/game.js',
+    target: 'web',
     output: {
-        pathinfo: true,
-        path: path.resolve(__dirname, 'dist'),
-        publicPath: './dist/',
-        filename: 'bundle.js'
+        filename: '[name].bundle.js',
+        path: path.resolve(__dirname, 'dist')
     },
-    watch: true,
-    plugins: [
-        definePlugin,
-        new webpack.optimize.CommonsChunkPlugin({ name: 'vendor'/* chunkName= */, filename: 'vendor.bundle.js'/* filename= */ }),
-        new HtmlWebpackPlugin({
-            filename: '../index.html',
-            template: './src/index.html',
-            chunks: ['vendor', 'app'],
-            chunksSortMode: 'manual',
-            minify: {
-                removeAttributeQuotes: false,
-                collapseWhitespace: false,
-                html5: false,
-                minifyCSS: false,
-                minifyJS: false,
-                minifyURLs: false,
-                removeComments: false,
-                removeEmptyAttributes: false
-            },
-            hash: false
-        }),
-        new BrowserSyncPlugin({
-            host: process.env.IP || 'localhost',
-            port: process.env.PORT || 3000,
-            server: {
-                baseDir: ['./', './build']
+    devServer: {
+        contentBase: path.join(__dirname, 'dist'),
+        port: 9000
+    },
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                commons: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendors',
+                    chunks: 'all'
+                }
             }
+        }
+    },
+    plugins: [
+        new CleanWebpackPlugin([ 'dist' ]),
+        new CopyWebpackPlugin([ { from: 'assets' } ]),
+        new HtmlWebpackPlugin({
+            title: 'fullpage template',
+            template: 'src/index.html'
         })
     ],
     module: {
         rules: [
-            { test: /\.js$/, use: ['babel-loader'], include: path.join(__dirname, 'src') },
-            { test: /phaser-split\.js$/, use: ['expose-loader?Phaser'] },
-            { test: [/\.vert$/, /\.frag$/], use: 'raw-loader' }
+            {
+                test: /\.js$/,
+                exclude: /(node_modules|bower_components)/,
+                use: { loader: 'babel-loader' }
+            }
         ]
-    },
-    node: {
-        fs: 'empty',
-        net: 'empty',
-        tls: 'empty'
-    },
-    resolve: {
-        alias: {
-            'phaser': phaser,
-        }
     }
-}
+};
