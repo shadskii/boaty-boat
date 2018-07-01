@@ -1,7 +1,7 @@
 import Enemy from './Enemy';
 
 export default class Mine extends Enemy {
-    constructor (config) {
+    constructor(config) {
         super(config);
         this.body.velocity.x = -300;
         this.acceleration = 0;

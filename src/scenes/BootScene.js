@@ -1,9 +1,9 @@
 class BootScene extends Phaser.Scene {
-    constructor () {
-        super({ key: 'BootScene' });
+    constructor() {
+        super({key: 'BootScene'});
     }
 
-    preload () {
+    preload() {
         this.load.image('water', 'images/water.png');
         this.load.image('ground', 'images/sandy-bottom.png');
         this.load.image('torpedo', 'images/torpedo.png');
@@ -14,7 +14,7 @@ class BootScene extends Phaser.Scene {
         this.load.image('play-again', 'images/play_again.png');
     }
 
-    create () {
+    create() {
         this.scene.start('TitleScene');
     }
 }

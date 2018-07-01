@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 
 export default class Boaty extends Phaser.GameObjects.Sprite {
-    constructor (config) {
+    constructor(config) {
         super(config.scene, config.x, config.y, config.key);
         config.scene.physics.world.enable(this);
         config.scene.add.existing(this);
@@ -11,23 +11,22 @@ export default class Boaty extends Phaser.GameObjects.Sprite {
         this.body.setCollideWorldBounds(true);
     }
 
-    update (jump) {
+    update(jump) {
         if (jump) {
             this.jump();
-        }
-        else if (this.angle < 15) {
+        } else if (this.angle < 15) {
             this.angle += 0.75;
         }
     }
 
-    jump () {
+    jump() {
         this.body.setVelocityY(-400);
         if (this.angle > -20) {
             this.angle = -15;
         }
     }
 
-    die () {
+    die() {
         this.alive = false;
     }
 }

@@ -6,26 +6,34 @@ import Crab from '../sprites/Crab';
 import Torpedo from '../sprites/Torpedo';
 
 class GameScene extends Phaser.Scene {
-    constructor () {
-        super({ key: 'GameScene' });
+    constructor() {
+        super({key: 'GameScene'});
     }
 
-    create () {
+    create() {
         this.width = this.sys.game.config.width;
         this.height = this.sys.game.config.height;
 
-        this.add.image(this.width / 2, this.height / 2, 'water').setScale(10, 2);
+        this.add
+            .image(this.width / 2, this.height / 2, 'water')
+            .setScale(10, 2);
         this.platforms = this.physics.add.staticGroup();
-        this.platforms.create(0, this.height, 'ground').setScale(10, 0.5).refreshBody();
+        this.platforms
+            .create(0, this.height, 'ground')
+            .setScale(10, 0.5)
+            .refreshBody();
 
         this.score = 0;
-        this.scoreText = this.add.text(24, 24, '0', { fontSize: '32px', fill: '#fff' });
+        this.scoreText = this.add.text(24, 24, '0', {
+            fontSize: '32px',
+            fill: '#fff',
+        });
 
         this.boaty = new Boaty({
             scene: this,
             key: 'boaty',
             x: this.width / 8,
-            y: this.height / 7
+            y: this.height / 7,
         });
 
         // Enemy generation
@@ -34,25 +42,25 @@ class GameScene extends Phaser.Scene {
             delay: 800,
             callback: this.addMine,
             callbackScope: this,
-            loop: true
+            loop: true,
         });
         this.time.addEvent({
             delay: 2000,
             callback: this.addWhale,
             callbackScope: this,
-            loop: true
+            loop: true,
         });
         this.time.addEvent({
             delay: 4000,
             callback: this.addCrab,
             callbackScope: this,
-            loop: true
+            loop: true,
         });
         this.time.addEvent({
             delay: 9000,
             callback: this.addTorpedo,
             callbackScope: this,
-            loop: true
+            loop: true,
         });
 
         // Input controls
@@ -63,58 +71,68 @@ class GameScene extends Phaser.Scene {
         this.input.on('pointerup', (pointer) => {
             this.isJump = false;
         });
-        this.spaceJump = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        this.spaceJump = this.input.keyboard.addKey(
+            Phaser.Input.Keyboard.KeyCodes.SPACE
+        );
     }
 
-    update () {
+    update() {
         this.boaty.update(this.isJump || this.spaceJump.isDown);
-        this.enemies.children.entries.forEach(element => {
+        this.enemies.children.entries.forEach((element) => {
             element.update();
         });
         if (!this.boaty.alive) {
-            this.scene.start('GameOverScene', { score: this.score });
+            this.scene.start('GameOverScene', {score: this.score});
         }
     }
 
-    enemySpawnYValue () {
-        var range = this.height * 0.9;
-        var topPad = this.height * 0.02;
+    enemySpawnYValue() {
+        let range = this.height * 0.9;
+        let topPad = this.height * 0.02;
         return Math.floor(Math.random() * range) + topPad;
     }
 
-    addMine () {
-        this.enemies.add(new Mine({
-            scene: this,
-            key: 'mine',
-            x: this.width + this.width / 10,
-            y: this.enemySpawnYValue()
-        }));
+    addMine() {
+        this.enemies.add(
+            new Mine({
+                scene: this,
+                key: 'mine',
+                x: this.width + this.width / 10,
+                y: this.enemySpawnYValue(),
+            })
+        );
     }
-    addWhale () {
-        this.enemies.add(new Whale({
-            scene: this,
-            key: 'whale',
-            x: this.width + this.width / 5,
-            y: this.enemySpawnYValue()
-        }));
+    addWhale() {
+        this.enemies.add(
+            new Whale({
+                scene: this,
+                key: 'whale',
+                x: this.width + this.width / 5,
+                y: this.enemySpawnYValue(),
+            })
+        );
     }
-    addCrab () {
-        this.enemies.add(new Crab({
-            scene: this,
-            key: 'crab',
-            x: this.width + this.width / 10,
-            y: this.height * 0.95
-        }));
+    addCrab() {
+        this.enemies.add(
+            new Crab({
+                scene: this,
+                key: 'crab',
+                x: this.width + this.width / 10,
+                y: this.height * 0.95,
+            })
+        );
     }
-    addTorpedo () {
-        this.enemies.add(new Torpedo({
-            scene: this,
-            key: 'torpedo',
-            x: this.width + this.width / 10,
-            y: this.enemySpawnYValue()
-        }));
+    addTorpedo() {
+        this.enemies.add(
+            new Torpedo({
+                scene: this,
+                key: 'torpedo',
+                x: this.width + this.width / 10,
+                y: this.enemySpawnYValue(),
+            })
+        );
     }
-    incrementScore () {
+    incrementScore() {
         this.score++;
         this.scoreText.setText(this.score);
     }

@@ -1,7 +1,7 @@
 import Enemy from './Enemy';
 
 export default class Crab extends Enemy {
-    constructor (config) {
+    constructor(config) {
         super(config);
         this.body.velocity.x = -1000;
         this.acceleration = 0;
