@@ -1,16 +1,15 @@
+import {Phaser} from 'phaser';
+
+/**
+ * A general enemy for the game. Enemies should extend this.
+ */
 export default class extends Phaser.GameObjects.Sprite {
     constructor(config) {
         super(config.scene, config.x, config.y, config.key);
         config.scene.physics.world.enable(this);
         config.scene.add.existing(this);
         this.boaty = this.scene.boaty;
-        this.scene.physics.add.collider(
-            this,
-            this.boaty,
-            this.boatyHit,
-            this.boatyHit,
-            this
-        );
+        this.scene.physics.add.collider(this, this.boaty, this.boatyHit, this.boatyHit, this);
     }
 
     boatyHit(mine, boaty) {

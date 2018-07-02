@@ -1,5 +1,8 @@
 import Enemy from './Enemy';
 
+/**
+ * This guy loves moving fast and blowing stuff up.
+ */
 export default class Torpedo extends Enemy {
     constructor(config) {
         super(config);

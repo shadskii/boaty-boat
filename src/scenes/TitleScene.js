@@ -1,6 +1,10 @@
-import {Scene} from 'phaser';
+import {Scene, Phaser} from 'phaser';
 import {calculateSize} from '../game';
 
+/**
+ * The title scene is presented to the user first and gives them
+ * the option to start the game.
+ */
 class TitleScene extends Scene {
     constructor(test) {
         super({key: 'TitleScene'});
@@ -23,17 +27,9 @@ class TitleScene extends Scene {
             fontSize: '16px',
             fill: '#fff',
         });
-        Phaser.Display.Align.In.TopCenter(
-            this.title,
-            this.add.zone(width / 2, height - height / 4, width, height)
-        );
-        Phaser.Display.Align.In.BottomCenter(
-            this.pressStart,
-            this.add.zone(width / 2, height / 4, width, height)
-        );
-        this.startKey = this.input.keyboard.addKey(
-            Phaser.Input.Keyboard.KeyCodes.SPACE
-        );
+        Phaser.Display.Align.In.TopCenter(this.title, this.add.zone(width / 2, height - height / 4, width, height));
+        Phaser.Display.Align.In.BottomCenter(this.pressStart, this.add.zone(width / 2, height / 4, width, height));
+        this.startKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.start = false;
         this.input.on('pointerdown', (pointer) => {
             this.start = true;

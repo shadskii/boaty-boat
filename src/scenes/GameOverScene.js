@@ -1,3 +1,9 @@
+import {Phaser} from 'phaser';
+
+/**
+ * Scene shown to the user after the game has ended. Allowing
+ * them the option to play again.
+ */
 export default class GameOverScene extends Phaser.Scene {
     constructor() {
         super({key: 'GameOverScene'});
@@ -23,22 +29,14 @@ export default class GameOverScene extends Phaser.Scene {
             fontSize: width / 5 + 'px',
             fill: '#fff',
         });
-        this.restartButton = this.add
-            .image(0, 0, 'play-again')
-            .setInteractive();
+        this.restartButton = this.add.image(0, 0, 'play-again').setInteractive();
 
         this.input.on('gameobjectdown', (pointer, gameObject) => {
             if (gameObject === this.restartButton) {
                 this.scene.start('GameScene');
             }
         });
-        Phaser.Display.Align.In.Center(
-            this.scoreText,
-            this.add.zone(width / 2, height / 4, width, height)
-        );
-        Phaser.Display.Align.In.BottomCenter(
-            this.restartButton,
-            this.add.zone(width / 2, height / 4, width, height)
-        );
+        Phaser.Display.Align.In.Center(this.scoreText, this.add.zone(width / 2, height / 4, width, height));
+        Phaser.Display.Align.In.BottomCenter(this.restartButton, this.add.zone(width / 2, height / 4, width, height));
     }
 }

@@ -1,5 +1,8 @@
 import Enemy from './Enemy';
 
+/**
+ * This evil little guy loves to run across the bottom of the ocean
+ */
 export default class Crab extends Enemy {
     constructor(config) {
         super(config);

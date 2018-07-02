@@ -1,5 +1,8 @@
 import Enemy from './Enemy';
 
+/**
+ * Just a big dumb whale.
+ */
 export default class Whale extends Enemy {
     constructor(config) {
         super(config);

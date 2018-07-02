@@ -8,5 +8,25 @@
     "env": {
         "browser": true
     },
-    "rules": {}
+    "rules": {
+        "require-jsdoc": [
+            "error",
+            {
+                "require": {
+                    "FunctionDeclaration": true,
+                    "MethodDefinition": false,
+                    "ClassDeclaration": true,
+                    "ArrowFunctionExpression": false,
+                    "FunctionExpression": false
+                }
+            }
+        ],
+        "max-len": [
+            2,
+            {
+                "code": 120,
+                "ignoreUrls": true
+            }
+        ]
+    }
 }

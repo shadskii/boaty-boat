@@ -5,6 +5,9 @@ import Whale from '../sprites/Whale';
 import Crab from '../sprites/Crab';
 import Torpedo from '../sprites/Torpedo';
 
+/**
+ * This is the primary scene. The game is played during this scene.
+ */
 class GameScene extends Phaser.Scene {
     constructor() {
         super({key: 'GameScene'});
@@ -14,9 +17,7 @@ class GameScene extends Phaser.Scene {
         this.width = this.sys.game.config.width;
         this.height = this.sys.game.config.height;
 
-        this.add
-            .image(this.width / 2, this.height / 2, 'water')
-            .setScale(10, 2);
+        this.add.image(this.width / 2, this.height / 2, 'water').setScale(10, 2);
         this.platforms = this.physics.add.staticGroup();
         this.platforms
             .create(0, this.height, 'ground')
@@ -71,9 +72,7 @@ class GameScene extends Phaser.Scene {
         this.input.on('pointerup', (pointer) => {
             this.isJump = false;
         });
-        this.spaceJump = this.input.keyboard.addKey(
-            Phaser.Input.Keyboard.KeyCodes.SPACE
-        );
+        this.spaceJump = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     }
 
     update() {
