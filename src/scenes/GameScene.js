@@ -1,4 +1,4 @@
-import Phaser from 'phaser';
+import {Phaser, Scene, SPACE} from 'phaser';
 import Boaty from '../sprites/Boaty';
 import Mine from '../sprites/Mine';
 import Whale from '../sprites/Whale';
@@ -8,7 +8,7 @@ import Torpedo from '../sprites/Torpedo';
 /**
  * This is the primary scene. The game is played during this scene.
  */
-class GameScene extends Phaser.Scene {
+class GameScene extends Scene {
     constructor() {
         super({key: 'GameScene'});
     }
@@ -72,7 +72,7 @@ class GameScene extends Phaser.Scene {
         this.input.on('pointerup', (pointer) => {
             this.isJump = false;
         });
-        this.spaceJump = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        this.spaceJump = this.input.keyboard.addKey(SPACE);
     }
 
     update() {

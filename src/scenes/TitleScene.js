@@ -1,4 +1,4 @@
-import {Scene, Phaser} from 'phaser';
+import {Scene, Display, SPACE} from 'phaser';
 import {calculateSize} from '../game';
 
 /**
@@ -27,9 +27,9 @@ class TitleScene extends Scene {
             fontSize: '16px',
             fill: '#fff',
         });
-        Phaser.Display.Align.In.TopCenter(this.title, this.add.zone(width / 2, height - height / 4, width, height));
-        Phaser.Display.Align.In.BottomCenter(this.pressStart, this.add.zone(width / 2, height / 4, width, height));
-        this.startKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        Display.Align.In.TopCenter(this.title, this.add.zone(width / 2, height - height / 4, width, height));
+        Display.Align.In.BottomCenter(this.pressStart, this.add.zone(width / 2, height / 4, width, height));
+        this.startKey = this.input.keyboard.addKey(SPACE);
         this.start = false;
         this.input.on('pointerdown', (pointer) => {
             this.start = true;

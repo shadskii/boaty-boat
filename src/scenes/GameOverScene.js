@@ -1,10 +1,10 @@
-import {Phaser} from 'phaser';
+import {Scene, Display} from 'phaser';
 
 /**
  * Scene shown to the user after the game has ended. Allowing
  * them the option to play again.
  */
-export default class GameOverScene extends Phaser.Scene {
+export default class GameOverScene extends Scene {
     constructor() {
         super({key: 'GameOverScene'});
     }
@@ -36,7 +36,7 @@ export default class GameOverScene extends Phaser.Scene {
                 this.scene.start('GameScene');
             }
         });
-        Phaser.Display.Align.In.Center(this.scoreText, this.add.zone(width / 2, height / 4, width, height));
-        Phaser.Display.Align.In.BottomCenter(this.restartButton, this.add.zone(width / 2, height / 4, width, height));
+        Display.Align.In.Center(this.scoreText, this.add.zone(width / 2, height / 4, width, height));
+        Display.Align.In.BottomCenter(this.restartButton, this.add.zone(width / 2, height / 4, width, height));
     }
 }

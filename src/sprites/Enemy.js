@@ -1,9 +1,9 @@
-import {Phaser} from 'phaser';
+import {Phaser, GameObjects} from 'phaser';
 
 /**
  * A general enemy for the game. Enemies should extend this.
  */
-export default class extends Phaser.GameObjects.Sprite {
+export default class extends GameObjects.Sprite {
     constructor(config) {
         super(config.scene, config.x, config.y, config.key);
         config.scene.physics.world.enable(this);
