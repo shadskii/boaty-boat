@@ -8,7 +8,7 @@
     "scripts": {
         "dev": "webpack-dev-server --mode development --open",
         "build": "webpack --config webpack.config.js",
-        "deploy": "webpack --config webpack.production.config.js && gh-pages -d build",
+        "deploy": "webpack --config webpack.config.js --mode production && gh-pages -d dist",
         "cleanEnv": "rm -rf node_modules && npm install",
         "test": "eslint ./src/**/**.js"
     },
