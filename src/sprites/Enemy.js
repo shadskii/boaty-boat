@@ -1,4 +1,4 @@
-import {Phaser, GameObjects} from 'phaser';
+import {GameObjects} from 'phaser';
 
 /**
  * A general enemy for the game. Enemies should extend this.
